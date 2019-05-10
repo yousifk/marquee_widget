@@ -2,7 +2,7 @@ name: marquee_widget
 description: A new Flutter package project.
 version: 0.0.1
 author: YousifK
-homepage:
+homepage: https://github.com/yousifk/marquee_widget
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
