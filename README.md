@@ -149,8 +149,6 @@ GridView.count(
 
 
 
-For more information about the properties, have a look at the
-[API reference](https://pub.dartlang.org/documentation/marquee/).
 
 ## LICENSE
 
