@@ -12,7 +12,12 @@ accelerating and decelerating.
 ## Usage
 
 
-![](Image/untitled.gif)
+![](Image/screenShot.gif)
+
+
+![](https://youtu.be/nhRpEIibKJQ)
+
+
 This is a minimalistic example:
 
 ```dart
