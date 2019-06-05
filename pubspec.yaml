@@ -1,6 +1,6 @@
 name: marquee_widget
 description: A Flutter widget that scrolls Widget Text and other Widget with supported RTL.
-version: 0.7.0
+version: 0.7.1
 author: YousifK <yousifk55@gmail.com>
 homepage: https://github.com/yousifk/marquee_widget
 
