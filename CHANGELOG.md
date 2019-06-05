@@ -1,10 +1,10 @@
 ## [0.7.0] 
 
-* add Web 
+* improvement 
 
 ## [0.6.0] 
 
-* add Exmple 
+* add Example 
 * add Image Widget Example
 
 ## [0.5.0] 

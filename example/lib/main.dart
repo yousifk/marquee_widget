@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+
+  MyHomePage({@required this.title, Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -42,12 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Expanded(
                       child: Image.network(
-                    "https://i.pinimg.com/564x/9d/a6/36/9da636b9e60ea40b18921b0053b7d486.jpg",
-                    fit: BoxFit.fitHeight,filterQuality: FilterQuality.high,
+                    'https://i.pinimg.com/564x/9d/a6/36/9da636b9e60ea40b18921b0053b7d486.jpg',
+                    fit: BoxFit.fitHeight,
+                    filterQuality: FilterQuality.high,
                   )),
                   Marquee(
                       child: Text(
-                    "Flutter is a free and open source Google mobile UI ",
+                    'Flutter is a free and open source Google mobile UI ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -60,12 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Expanded(
                       child: Image.network(
-                    "https://cdn-images-1.medium.com/max/1000/1*upTyVPOfBb0c4o1r57C9_w.png",
-                    fit: BoxFit.fitHeight,filterQuality: FilterQuality.high,
+                    'https://cdn-images-1.medium.com/max/1000/1*upTyVPOfBb0c4o1r57C9_w.png',
+                    fit: BoxFit.fitHeight,
+                    filterQuality: FilterQuality.high,
                   )),
                   Marquee(
                       child: Text(
-                    "Flutter is a free and open source Google mobile UI ",
+                    'Flutter is a free and open source Google mobile UI ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -81,12 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Container(
                               width: 1000,
                               child: Image.network(
-                                "https://i.pinimg.com/564x/9d/a6/36/9da636b9e60ea40b18921b0053b7d486.jpg",
-                                fit: BoxFit.fitWidth,filterQuality: FilterQuality.high,
+                                'https://i.pinimg.com/564x/9d/a6/36/9da636b9e60ea40b18921b0053b7d486.jpg',
+                                fit: BoxFit.fitWidth,
+                                filterQuality: FilterQuality.high,
                               )))),
                   Marquee(
                       child: Text(
-                    "Flutter is a free and open source Google mobile UI ",
+                    'Flutter is a free and open source Google mobile UI ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -98,23 +102,26 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   Marquee(
-                      child: Container(width: 1000,
-                        child: Column(
-                    children: <Widget>[
+                      child: Container(
+                    width: 1000,
+                    child: Column(
+                      children: <Widget>[
                         Marquee(
                             child: Container(
-                                width: 1000,height: 260,
+                                width: 1000,
+                                height: 260,
                                 child: Image.network(
-                                  "https://cdn-images-1.medium.com/max/1000/1*upTyVPOfBb0c4o1r57C9_w.png",
-                                  fit: BoxFit.fitWidth, filterQuality: FilterQuality.high,
+                                  'https://cdn-images-1.medium.com/max/1000/1*upTyVPOfBb0c4o1r57C9_w.png',
+                                  fit: BoxFit.fitWidth,
+                                  filterQuality: FilterQuality.high,
                                 ))),
                         Text(
-                          "Flutter is a free and open source Google mobile UI ",
+                          'Flutter is a free and open source Google mobile UI ',
                           style: TextStyle(fontSize: 16),
                         ),
-                    ],
-                  ),
-                      )),
+                      ],
+                    ),
+                  )),
                 ],
               ),
             ),
