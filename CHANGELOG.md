@@ -1,6 +1,7 @@
-## [0.7.1] 
+## [0.7.5] 
 
-* improvement 
+* improvement.
+* update dependencies.
 
 ## [0.6.0] 
 
