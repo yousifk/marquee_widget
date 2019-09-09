@@ -102,26 +102,27 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   Marquee(
+                    textDirection: TextDirection.rtl,
+                      directionMarguee: DirectionMarguee.oneDirection,
                       child: Container(
-                    width: 1000,
-                    child: Column(
-                      children: <Widget>[
-                        Marquee(
-                            child: Container(
+                        width: 1000,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
                                 width: 1000,
                                 height: 260,
                                 child: Image.network(
                                   'https://cdn-images-1.medium.com/max/1000/1*upTyVPOfBb0c4o1r57C9_w.png',
                                   fit: BoxFit.fitWidth,
                                   filterQuality: FilterQuality.high,
-                                ))),
-                        Text(
-                          'Flutter is a free and open source Google mobile UI ',
-                          style: TextStyle(fontSize: 16),
+                                )),
+                            Text(
+                              'Flutter is a free and open source Google mobile UI ',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )),
+                      )),
                 ],
               ),
             ),

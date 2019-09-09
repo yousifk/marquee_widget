@@ -1,4 +1,8 @@
-## [0.7.5] 
+## [0.8.0] 
+
+* OneDirection and two Direction.
+
+## [0.7.7] 
 
 * improvement.
 * update dependencies.

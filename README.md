@@ -40,6 +40,8 @@ Marquee(
   animationDuration: Duration(seconds: 1),
   backDuration: Duration(milliseconds: 5000),
   pauseDuration: Duration(milliseconds: 2500),
+  directionMarguee: DirectionMarguee.oneDirection,
+
 )
 ```
 
