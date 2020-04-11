@@ -52,7 +52,6 @@ class Marquee extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(directionMarguee);
     scroll();
     return Directionality(
       textDirection: textDirection,
