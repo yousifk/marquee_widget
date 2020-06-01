@@ -1,10 +1,11 @@
 library marquee_widget;
 
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 
 enum DirectionMarguee { oneDirection, TwoDirection }
 
-class Marquee extends StatelessWidget {
+class Marquee extends StatefulWidget {
   final Widget child;
   final TextDirection textDirection;
   final Axis direction;
@@ -20,44 +21,55 @@ class Marquee extends StatelessWidget {
       this.pauseDuration = const Duration(milliseconds: 2000),
       this.directionMarguee = DirectionMarguee.TwoDirection});
 
+  @override
+  State<StatefulWidget> createState() => MarqueeState();
+}
+
+class MarqueeState extends State<Marquee> {
   final ScrollController _scrollController = ScrollController();
+  RestartableTimer _pauseTimer;
 
   scroll() async {
-    while (true) {
-      if (_scrollController.hasClients) {
-        await Future.delayed(pauseDuration);
-        if (_scrollController.hasClients)
-          await _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: animationDuration,
-              curve: Curves.easeIn);
-        await Future.delayed(pauseDuration);
-        if (_scrollController.hasClients)
-          switch (directionMarguee) {
-            case DirectionMarguee.oneDirection:
-              _scrollController.jumpTo(
-                0.0,
-              );
-              break;
-            case DirectionMarguee.TwoDirection:
-              await _scrollController.animateTo(0.0,
-                  duration: backDuration, curve: Curves.easeOut);
-              break;
-          }
+    if (_scrollController.hasClients) {
+      final position = _scrollController.position;
+      if (position.pixels == position.minScrollExtent) {
+        await _scrollController.animateTo(position.maxScrollExtent,
+            duration: widget.animationDuration, curve: Curves.easeIn);
       } else {
-        await Future.delayed(pauseDuration);
+        switch (widget.directionMarguee) {
+          case DirectionMarguee.oneDirection:
+            _scrollController.jumpTo(
+              position.minScrollExtent,
+            );
+            break;
+          case DirectionMarguee.TwoDirection:
+            await _scrollController.animateTo(0.0,
+                duration: widget.backDuration, curve: Curves.easeOut);
+            break;
+        }
       }
     }
+
+    _pauseTimer.reset();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_pauseTimer != null && _pauseTimer.isActive) {
+      _pauseTimer.cancel();
+    }
+    _scrollController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    scroll();
+    _pauseTimer = RestartableTimer(widget.pauseDuration, scroll);
     return Directionality(
-      textDirection: textDirection,
+      textDirection: widget.textDirection,
       child: SingleChildScrollView(
-        child: child,
-        scrollDirection: direction,
+        child: widget.child,
+        scrollDirection: widget.direction,
         controller: _scrollController,
       ),
     );
