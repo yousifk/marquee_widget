@@ -1,3 +1,7 @@
+## [1.0.0-nullsafety]
+
+* supported nullsafety
+
 ## [1.0.0]
 
 * add forwordAnimation and backwardAnimation
