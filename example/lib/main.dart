@@ -12,16 +12,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Marquee Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  final String title;
-
-  MyHomePage({@required this.title, Key key}) : super(key: key);
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -31,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Marquee Home Page'),
       ),
       body: GridView.count(
         crossAxisCount: 2,
@@ -49,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
                   Marquee(
                       child: Text(
-                    'Flutter is a free and open source Google mobile UI ',
+                    'Flutter is a free and open source Google mobile UI . ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -68,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
                   Marquee(
                       child: Text(
-                    'Flutter is a free and open source Google mobile UI ',
+                    'Flutter is a free and open source Google mobile UI. ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -90,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               )))),
                   Marquee(
                       child: Text(
-                    'Flutter is a free and open source Google mobile UI ',
+                    'Flutter is a free and open source Google mobile UI... ',
                     style: TextStyle(fontSize: 16),
                   )),
                 ],
@@ -102,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   Marquee(
-                    textDirection: TextDirection.rtl,
+                      textDirection: TextDirection.rtl,
                       directionMarguee: DirectionMarguee.oneDirection,
                       child: Container(
                         width: 1000,

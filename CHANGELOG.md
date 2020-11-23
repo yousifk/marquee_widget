@@ -1,4 +1,9 @@
-## [0.8.0] 
+## [1.0.0]
+
+* add forwordAnimation and backwardAnimation
+* update android example
+
+## [0.8.0]
 
 * OneDirection and two Direction.
 

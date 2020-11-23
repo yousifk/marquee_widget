@@ -10,6 +10,8 @@ class Marquee extends StatelessWidget {
   final Axis direction;
   final Duration animationDuration, backDuration, pauseDuration;
   final DirectionMarguee directionMarguee;
+  final Cubic forwardAnimation;
+  final Cubic backwardAnimation;
 
   Marquee(
       {@required this.child,
@@ -18,7 +20,9 @@ class Marquee extends StatelessWidget {
       this.animationDuration = const Duration(milliseconds: 5000),
       this.backDuration = const Duration(milliseconds: 5000),
       this.pauseDuration = const Duration(milliseconds: 2000),
-      this.directionMarguee = DirectionMarguee.TwoDirection});
+      this.directionMarguee = DirectionMarguee.TwoDirection,
+      this.forwardAnimation = Curves.easeIn,
+      this.backwardAnimation = Curves.easeOut});
 
   final ScrollController _scrollController = ScrollController();
 
@@ -27,10 +31,8 @@ class Marquee extends StatelessWidget {
       if (_scrollController.hasClients) {
         await Future.delayed(pauseDuration);
         if (_scrollController.hasClients)
-          await _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: animationDuration,
-              curve: Curves.easeIn);
+          await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+              duration: animationDuration, curve: forwardAnimation);
         await Future.delayed(pauseDuration);
         if (_scrollController.hasClients)
           switch (directionMarguee) {
@@ -40,8 +42,7 @@ class Marquee extends StatelessWidget {
               );
               break;
             case DirectionMarguee.TwoDirection:
-              await _scrollController.animateTo(0.0,
-                  duration: backDuration, curve: Curves.easeOut);
+              await _scrollController.animateTo(0.0, duration: backDuration, curve: backwardAnimation);
               break;
           }
       } else {
