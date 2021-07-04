@@ -44,10 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     filterQuality: FilterQuality.high,
                   )),
                   Marquee(
-                      child: Text(
-                    'Flutter is a free and open source Google mobile UI . ',
-                    style: TextStyle(fontSize: 16),
-                  )),
+                    child: Text(
+                      'Flutter is a free and open source Google mobile UI . ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    autoRepeat: false,
+                  ),
                 ],
               ),
             ),

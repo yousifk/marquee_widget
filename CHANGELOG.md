@@ -1,3 +1,8 @@
+## [1.1.0]
+
+* full supported nullsafety
+* added autoRepeat, also single movement
+
 ## [1.0.0-nullsafety]
 
 * supported nullsafety
