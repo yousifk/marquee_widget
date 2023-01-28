@@ -10,8 +10,8 @@ class Marquee extends StatelessWidget {
   final Axis direction;
   final Duration animationDuration, backDuration, pauseDuration;
   final DirectionMarguee directionMarguee;
-  final Cubic forwardAnimation;
-  final Cubic backwardAnimation;
+  final Curve forwardAnimation;
+  final Curve backwardAnimation;
   final bool autoRepeat;
   Marquee(
       {required this.child,
