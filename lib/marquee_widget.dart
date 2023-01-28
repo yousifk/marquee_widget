@@ -17,6 +17,7 @@ class Marquee extends StatefulWidget {
   final bool autoRepeat;
 
   const Marquee({
+    Key? key,
     required this.child,
     this.marqueeDirection = MarqueeDirection.forwardAndBackward,
     this.direction = Axis.horizontal,
@@ -27,7 +28,7 @@ class Marquee extends StatefulWidget {
     this.backwardAnimationDuration = const Duration(milliseconds: 5000),
     this.animationGapDuration = const Duration(milliseconds: 2000),
     this.autoRepeat = true,
-  });
+  }) : super(key: key);
 
   @override
   State<Marquee> createState() => _MarqueeState();
