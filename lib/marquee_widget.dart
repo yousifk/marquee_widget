@@ -2,71 +2,139 @@ library marquee_widget;
 
 import 'package:flutter/material.dart';
 
-enum DirectionMarguee { oneDirection, TwoDirection }
+enum MarqueeDirection { forward, backward, forwardAndBackward }
 
-class Marquee extends StatelessWidget {
+class Marquee extends StatefulWidget {
   final Widget child;
-  final TextDirection textDirection;
+  final MarqueeDirection marqueeDirection;
   final Axis direction;
-  final Duration animationDuration, backDuration, pauseDuration;
-  final DirectionMarguee directionMarguee;
+  final TextDirection textDirection;
   final Curve forwardAnimation;
   final Curve backwardAnimation;
+  final Duration forwardAnimationDuration;
+  final Duration backwardAnimationDuration;
+  final Duration animationGapDuration;
   final bool autoRepeat;
-  Marquee(
-      {required this.child,
-      this.direction = Axis.horizontal,
-      this.textDirection = TextDirection.ltr,
-      this.animationDuration = const Duration(milliseconds: 5000),
-      this.backDuration = const Duration(milliseconds: 5000),
-      this.pauseDuration = const Duration(milliseconds: 2000),
-      this.directionMarguee = DirectionMarguee.TwoDirection,
-      this.forwardAnimation = Curves.easeIn,
-      this.backwardAnimation = Curves.easeOut,
-      this.autoRepeat = true});
 
+  const Marquee({
+    required this.child,
+    this.marqueeDirection = MarqueeDirection.forwardAndBackward,
+    this.direction = Axis.horizontal,
+    this.textDirection = TextDirection.ltr,
+    this.forwardAnimation = Curves.easeIn,
+    this.backwardAnimation = Curves.easeOut,
+    this.forwardAnimationDuration = const Duration(milliseconds: 5000),
+    this.backwardAnimationDuration = const Duration(milliseconds: 5000),
+    this.animationGapDuration = const Duration(milliseconds: 2000),
+    this.autoRepeat = true,
+  });
+
+  @override
+  State<Marquee> createState() => _MarqueeState();
+}
+
+class _MarqueeState extends State<Marquee> {
   final ScrollController _scrollController = ScrollController();
 
-  scroll(bool repeated) async {
-    do {
-      if (_scrollController.hasClients) {
-        await Future.delayed(pauseDuration);
-        if (_scrollController.hasClients)
-          await _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: animationDuration,
-              curve: forwardAnimation);
-        await Future.delayed(pauseDuration);
-        if (_scrollController.hasClients)
-          switch (directionMarguee) {
-            case DirectionMarguee.oneDirection:
-              _scrollController.jumpTo(
-                0.0,
-              );
-              break;
-            case DirectionMarguee.TwoDirection:
-              await _scrollController.animateTo(0.0,
-                  duration: backDuration, curve: backwardAnimation);
-              break;
-          }
-        repeated = autoRepeat;
-      } else {
-        await Future.delayed(pauseDuration);
-      }
-    } while (repeated);
+  void _animate() async {
+    switch (widget.marqueeDirection) {
+      case MarqueeDirection.forward:
+        _playForwardAnimation();
+        break;
+      case MarqueeDirection.backward:
+        _playBackwardAnimation();
+        break;
+      case MarqueeDirection.forwardAndBackward:
+        _playForwardAndBackwardAnimation();
+        break;
+    }
+  }
+
+  Future<void> _playForwardAnimation() async {
+    _setPositionToStart();
+
+    await _animateForward();
+
+    if (widget.autoRepeat) {
+      await Future.delayed(widget.animationGapDuration);
+      await _playForwardAnimation();
+    }
+  }
+
+  Future<void> _playBackwardAnimation() async {
+    _setPositionToEnd();
+
+    await _animateBackward();
+
+    if (widget.autoRepeat) {
+      await Future.delayed(widget.animationGapDuration);
+      await _playBackwardAnimation();
+    }
+  }
+
+  Future<void> _playForwardAndBackwardAnimation() async {
+    _setPositionToStart();
+
+    await _animateForward();
+
+    await Future.delayed(widget.animationGapDuration);
+
+    await _animateBackward();
+
+    if (widget.autoRepeat) {
+      await Future.delayed(widget.animationGapDuration);
+      await _playForwardAndBackwardAnimation();
+    }
+  }
+
+  Future<void> _animateForward() async {
+    return await _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      curve: widget.forwardAnimation,
+      duration: widget.forwardAnimationDuration,
+    );
+  }
+
+  Future<void> _animateBackward() async {
+    return await _scrollController.animateTo(
+      _scrollController.position.minScrollExtent,
+      curve: widget.backwardAnimation,
+      duration: widget.backwardAnimationDuration,
+    );
+  }
+
+  void _setPositionToStart() {
+    _scrollController.jumpTo(_scrollController.position.minScrollExtent);
+  }
+
+  void _setPositionToEnd() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animate();
+    });
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool _repeated = true;
-    scroll(_repeated);
     return Directionality(
-      textDirection: textDirection,
+      textDirection: widget.textDirection,
       child: SingleChildScrollView(
-        child: child,
-        scrollDirection: direction,
         controller: _scrollController,
+        scrollDirection: widget.direction,
+        child: widget.child,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
