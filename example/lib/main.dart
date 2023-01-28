@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Marquee(
                       textDirection: TextDirection.rtl,
-                      directionMarguee: DirectionMarguee.oneDirection,
+                      marqueeDirection: MarqueeDirection.forward,
                       child: Container(
                         width: 1000,
                         child: Column(

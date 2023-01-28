@@ -35,12 +35,12 @@ with Continer()
 ```dart
 Marquee(
   child:Text( 'This project is a starting point for a Dart package'),
-  scrollAxis: Axis.horizontal,
+  direction: Axis.horizontal,
   textDirection : TextDirection.rtl,
-  animationDuration: Duration(seconds: 1),
-  backDuration: Duration(milliseconds: 5000),
-  pauseDuration: Duration(milliseconds: 2500),
-  directionMarguee: DirectionMarguee.oneDirection,
+  forwardAnimationDuration: Duration(seconds: 1),
+  backwardAnimationDuration: Duration(milliseconds: 5000),
+  animationGapDuration: Duration(milliseconds: 2500),
+  marqueeDirection: MarqueeDirection.forward,
 
 )
 ```
